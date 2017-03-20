@@ -25,9 +25,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return 5
-	    }
+    }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
@@ -57,40 +56,60 @@ class VideoCell: UICollectionViewCell {
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor.blue
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    let userProfileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = UIColor.green
+        return imageView
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.purple
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let seperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     func setupView() {
+        
         addSubview(thumbnailImageView)
+        addSubview(userProfileImageView)
+        addSubview(titleLabel)
         addSubview(seperatorView)
         
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": thumbnailImageView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-16-[v1(1)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": thumbnailImageView, "v1": seperatorView]))
+        //Horizontal contraintss
+        addContraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
+        addContraintsWithFormat(format: "H:|-16-[v0(44)]-16-|", views: userProfileImageView)
         
-        self.addConstraintWithFormat("V:|-16-[v0]-16-[v1(1)]|", view: thumbnailImageView, seperatorView)
+        //Vertical contraints
+        addContraintsWithFormat(format: "V:|-16-[v0]-16-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, seperatorView)
+        addContraintsWithFormat(format: "H:|[v0]|", views: seperatorView)
         
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": seperatorView]))
+        //Top contraints
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
         
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
     }
-    
-    extension UIView {
-        func addContraintsWithFormat(format: String, view: UIView...) {
-            
-            var viewsDictionary = [String:UIView]()
-            
-            for(index, view) in views.enumerate*() {
-                
-            }
-                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-16-[v1(1)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": thumbnailImageView, "v1": seperatorView]))
-        }
-    }
 }
+
+    extension UIView {
+        func addContraintsWithFormat(format: String, views: UIView...) {
+            var viewsDictionary = [String:UIView]()
+    
+            for(index, view) in views.enumerated() {
+                let key = "v\(index)"
+                view.translatesAutoresizingMaskIntoConstraints = false
+                viewsDictionary[key] = view
+            }
+                addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        }
+}
+
