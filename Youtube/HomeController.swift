@@ -62,6 +62,7 @@ class VideoCell: UICollectionViewCell {
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor.green
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -70,6 +71,13 @@ class VideoCell: UICollectionViewCell {
         label.backgroundColor = UIColor.purple
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let subtitleTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = UIColor.red
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
     }()
     
     let seperatorView: UIView = {
@@ -83,19 +91,42 @@ class VideoCell: UICollectionViewCell {
         addSubview(thumbnailImageView)
         addSubview(userProfileImageView)
         addSubview(titleLabel)
+        addSubview(subtitleTextView)
         addSubview(seperatorView)
         
         //Horizontal contraintss
         addContraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
-        addContraintsWithFormat(format: "H:|-16-[v0(44)]-16-|", views: userProfileImageView)
+        addContraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
         
         //Vertical contraints
-        addContraintsWithFormat(format: "V:|-16-[v0]-16-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, seperatorView)
+        addContraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, seperatorView)
         addContraintsWithFormat(format: "H:|[v0]|", views: seperatorView)
         
         //Top contraints
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
         
+        //Left contraints
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        
+        //Right contraints
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        
+        //Height ontraintsß
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        
+        
+        //Top contraints
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 8))
+        
+        //Left contraints
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
+        
+        //Right contraints
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
+        
+        //Height ontraints
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+    
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
     }
 }
