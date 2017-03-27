@@ -56,6 +56,7 @@ class VideoCell: UICollectionViewCell {
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor.blue
+        imageView.image = UIImage(named: "taylor_swift_blank_space")
         return imageView
     }()
     
@@ -124,7 +125,7 @@ class VideoCell: UICollectionViewCell {
         //Right contraints
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         
-        //Height ontraints
+        //Height contraints
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
     
         thumbnailImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
