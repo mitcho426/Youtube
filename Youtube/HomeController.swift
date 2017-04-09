@@ -27,6 +27,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
         setupMenuBar()
+        setupNavBarButtons()
     }
     
     let menuBar: UIView = {
@@ -38,6 +39,23 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addSubview(menuBar)
         view.addContraintsWithFormat(format: "H:|[v0]|", views: menuBar)
         view.addContraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+    }
+    
+    //Setting up buttons on the UI navigation bar
+    func setupNavBarButtons() {
+        let searchImage = UIImage(named: "search_icon")
+        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+        
+        let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon"), style: .plain, target: self, action: #selector(handleMore))
+        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
+    }
+    
+    func handleSearch() {
+        print(123)
+    }
+    
+    func handleMore() {
+        print(321)
     }
 
     override func didReceiveMemoryWarning() {
