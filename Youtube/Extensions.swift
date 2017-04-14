@@ -1,5 +1,5 @@
 //
-//  
+//
 // Extensions.swift
 //  Youtube
 //
@@ -54,13 +54,12 @@ class CustomImageView: UIImageView {
                 return
             }
             
-            DispatchQueue.main.async(execute: { 
+            DispatchQueue.main.async(execute: {
                 let imageToCache = UIImage(data: data!)
                 
                 if self.imageUrlString == urlString {
                     self.image = imageToCache
                 }
-                
                 imageCache.setObject(imageToCache!, forKey: urlString as NSString)
             })
             
