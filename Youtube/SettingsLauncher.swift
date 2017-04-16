@@ -37,6 +37,8 @@ class SettingLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDel
         return [Setting(name: "Settings", imageName: "settings"), Setting(name: "Terms & privacy policy", imageName: "privacy"), Setting(name: "Send Feedback", imageName: "feedback"), Setting(name: "Help", imageName: "help"), Setting(name: "Switch Account", imageName: "switch_account"), Setting(name: "Cancel", imageName: "cancel")]
     }()
     
+    var homeController: HomeController?
+    
     
     
     func showSettings() {
@@ -70,12 +72,19 @@ class SettingLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDel
     }
     
     //Dismiss Dim
-    func handleDismiss() {
-        UIView.animate(withDuration: 0.5) {
+    func handleDismiss(setting: Setting) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.blackView.alpha = 0
             
             if let window = UIApplication.shared.keyWindow {
-                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                self.collectionView.frame = CGRect(x: 0, y: window.frame.height,
+                                                   width: self.collectionView.frame.width,
+                                                   height: self.collectionView.frame.height)
+            }
+        }) { (completed: Bool) in
+            
+            if setting.name != "" && setting.name != "Cancel" {
+                self.homeController?.showControllerForSetting(setting: setting)
             }
         }
     }
@@ -100,6 +109,11 @@ class SettingLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDel
     //Spacing between Cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let setting = self.settings[indexPath.item]
+        handleDismiss(setting: setting)
     }
     
     override init() {

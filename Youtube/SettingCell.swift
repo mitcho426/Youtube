@@ -10,7 +10,6 @@ import UIKit
 
 class SettingCell: BaseCell {
     
-    
     override var isHighlighted: Bool {
         didSet {
             backgroundColor = isHighlighted ? UIColor.darkGray : UIColor.white
@@ -29,6 +28,7 @@ class SettingCell: BaseCell {
             }
         }
     }
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Setting"
