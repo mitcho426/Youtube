@@ -32,7 +32,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     video.title = dictionary["title"] as? String
                     video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
                     
-                    
                     let channelDictionary = dictionary["channel"] as! [String: AnyObject]
                     let channel = Channel()
                     channel.name = channelDictionary["name"] as? String
@@ -52,7 +51,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
         
         }).resume()
-        
     }
     
     override func viewDidLoad() {
@@ -61,7 +59,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         fetchVideos()
         collectionView?.backgroundColor = UIColor.white
         
-        navigationItem.title = "Home"
+        navigationItem.title = "  Home"
         navigationController?.navigationBar.isTranslucent = false
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
@@ -83,11 +81,22 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     func setupMenuBar() {
+        navigationController?.hidesBarsOnSwipe = true
+        
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        view.addSubview(redView)
+        view.addContraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addContraintsWithFormat(format: "V:[v0(50)]", views: redView)
+            
         view.addSubview(menuBar)
         view.addContraintsWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addContraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+        view.addContraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        
     }
-    
+
     //Setting up buttons on the UI navigation bar
     func setupNavBarButtons() {
         let searchImage = UIImage(named: "search_icon")
@@ -115,7 +124,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func showControllerForSetting(setting: Setting) {
         let dummySettingViewController = UIViewController()
         dummySettingViewController.view.backgroundColor = UIColor.white
-        dummySettingViewController.navigationItem.title = setting.name
+        dummySettingViewController.navigationItem.title = setting.name.map { $0.rawValue }
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationController?.pushViewController(dummySettingViewController, animated: true)

@@ -9,13 +9,22 @@
 import UIKit
 
 class Setting: NSObject {
-    let name: String?
+    let name: SettingName?
     let imageName: String?
     
-    init(name: String, imageName: String) {
+    init(name: SettingName, imageName: String) {
         self.name = name
         self.imageName = imageName
     }
+}
+
+enum SettingName: String {
+    case Setting = "Settings"
+    case TermsPrivacy = "Terms & privacy policy"
+    case SendFeedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
+    case Cancel = "Cancel & Dimiss"
 }
 
 class SettingLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -34,13 +43,14 @@ class SettingLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDel
     let cellHeight: CGFloat = 50
 
     let settings: [Setting] = {
-        return [Setting(name: "Settings", imageName: "settings"), Setting(name: "Terms & privacy policy", imageName: "privacy"), Setting(name: "Send Feedback", imageName: "feedback"), Setting(name: "Help", imageName: "help"), Setting(name: "Switch Account", imageName: "switch_account"), Setting(name: "Cancel", imageName: "cancel")]
+        let settingsSetting = Setting(name: .Setting, imageName: "settings")
+        let cancelSetting = Setting(name: .Cancel, imageName: "cancel")
+        
+        return [Setting(name: .Setting, imageName: "settings"), Setting(name: .TermsPrivacy, imageName: "privacy"), Setting(name: .SendFeedback, imageName: "feedback"), Setting(name: .Help, imageName: "help"), Setting(name: .SwitchAccount, imageName: "switch_account"), cancelSetting]
     }()
     
     var homeController: HomeController?
-    
-    
-    
+
     func showSettings() {
         //This grabs the frame of the whole application
         if let window = UIApplication.shared.keyWindow {
@@ -83,7 +93,7 @@ class SettingLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDel
             }
         }) { (completed: Bool) in
             
-            if setting.name != "" && setting.name != "Cancel" {
+            if setting.name != .Cancel {
                 self.homeController?.showControllerForSetting(setting: setting)
             }
         }
