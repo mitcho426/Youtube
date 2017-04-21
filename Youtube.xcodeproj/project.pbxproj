@@ -18,6 +18,7 @@
 		1DCF9BCE1E91E1A4008BE66E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF9BCD1E91E1A4008BE66E /* Extensions.swift */; };
 		1DCF9BD11E91E266008BE66E /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF9BD01E91E266008BE66E /* VideoCell.swift */; };
 		1DCF9BD41E91E942008BE66E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF9BD31E91E942008BE66E /* MenuBar.swift */; };
+		1DF8E85C1EA890C000D2DF6C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF8E85B1EA890C000D2DF6C /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		1DCF9BCD1E91E1A4008BE66E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1DCF9BD01E91E266008BE66E /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		1DCF9BD31E91E942008BE66E /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		1DF8E85B1EA890C000D2DF6C /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		106A4B0D1E7E754C00702FDF /* Youtube */ = {
 			isa = PBXGroup;
 			children = (
+				1DF8E85A1EA890A400D2DF6C /* APIService */,
 				1DA7728C1E9A2E0C0055123B /* Model */,
 				1DCF9BD21E91E45D008BE66E /* ViewControllers */,
 				1DCF9BCF1E91E256008BE66E /* Views */,
@@ -112,6 +115,14 @@
 				1D23DAE41E9CBA8D00D5FEB3 /* SettingsLauncher.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1DF8E85A1EA890A400D2DF6C /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				1DF8E85B1EA890C000D2DF6C /* ApiService.swift */,
+			);
+			name = APIService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 				1DB602681EA0875F006D7FFF /* SettingCell.swift in Sources */,
 				1DCF9BD11E91E266008BE66E /* VideoCell.swift in Sources */,
 				1D23DAE51E9CBA8D00D5FEB3 /* SettingsLauncher.swift in Sources */,
+				1DF8E85C1EA890C000D2DF6C /* ApiService.swift in Sources */,
 				1DCF9BCE1E91E1A4008BE66E /* Extensions.swift in Sources */,
 				106A4B0F1E7E754C00702FDF /* AppDelegate.swift in Sources */,
 				1DCF9BD41E91E942008BE66E /* MenuBar.swift in Sources */,
